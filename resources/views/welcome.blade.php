@@ -1,91 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Pasirinkite vairuotoja</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="{{ route('postDrivers') }}" method="post">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="driver">Vairuotojas:</label>
+                                <select class="form-control" id="driver" name="driver">
+                                    @foreach($drivers as $driver)
+                                        @if($driver->id == $main_driver->id)
+                                            <option selected
+                                                    value="{{ $driver->id }}">{{ $driver->first_name . " " . $driver->last_name }}</option>
+                                        @else
+                                            <option value="{{ $driver->id }}">{{ $driver->first_name . " " . $driver->last_name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                            <button class="btn btn-default" type="submit">Rodyti informacija</button>
+                            <button type="button" class="btn btn-danger pull-right" style="margin-left: 3px;" data-toggle="modal" data-target="#deleteModal">Istrinti</button>
+                            <a id="edit-button" href="{{ route('editDriver', $main_driver->id) }}"
+                               class="btn btn-warning pull-right">Redaguoti</a>
+                            <br>
+                            <a href="{{ route('newDriver') }}" class="btn btn-primary" style="margin-top: 42px;">Ivesti
+                                nauja</a>
+                        </form>
+                    </div>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Informacija apie vairuotoja</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Vairuotojo ID: </strong>{{ $main_driver->id }}</li>
+                            <li class="list-group-item"><strong>Vardas: </strong>{{ $main_driver->first_name }}</li>
+                            <li class="list-group-item"><strong>Pavarde: </strong>{{ $main_driver->last_name }}</li>
+                            <li class="list-group-item"><strong>Gimimo data: </strong>{{ $main_driver->birth_date }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Vairuojami troleibusai</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Troleibuso ID</th>
+                                <th>Marke</th>
+                                <th>Pagaminimo data</th>
+                                <th>Valstybinis numeris</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($trolleybuses as $trolleybus)
+                                <tr>
+                                    <td>{{ $trolleybus->id }}</td>
+                                    <td>{{ $trolleybus->make }}</td>
+                                    <td>{{ $trolleybus->date }}</td>
+                                    <td>{{ $trolleybus->plate }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="deleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ar tikrai norite istrinti si vairuotja?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Vairuotojas bus istrintas negriztamai.</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="delete-button" href="{{ route('deleteDriver', $main_driver->id) }}" type="button" class="btn btn-default">Taip</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ne</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $("#driver").change(function () {
+            var id = $("#driver option:selected").attr("value");
+            var editUrl = "/driver/" + id + "/edit";
+            var deleteUrl = "/driver/" + id + "/delete";
+
+            $("#edit-button").attr("href", editUrl);
+            $("#delete-button").attr("href", deleteUrl);
+        });
+    </script>
+@endsection
