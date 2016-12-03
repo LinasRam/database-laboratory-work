@@ -25,7 +25,9 @@
                                 </select>
                             </div>
                             <button class="btn btn-default" type="submit">Rodyti informacija</button>
-                            <button type="button" class="btn btn-danger pull-right" style="margin-left: 3px;" data-toggle="modal" data-target="#deleteModal">Istrinti</button>
+                            <button type="button" class="btn btn-danger pull-right" style="margin-left: 3px;"
+                                    data-toggle="modal" data-target="#deleteModal">Istrinti
+                            </button>
                             <a id="edit-button" href="{{ route('editDriver', $main_driver->id) }}"
                                class="btn btn-warning pull-right">Redaguoti</a>
                             <br>
@@ -66,6 +68,7 @@
                                 <th>Marke</th>
                                 <th>Pagaminimo data</th>
                                 <th>Valstybinis numeris</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -75,6 +78,12 @@
                                     <td>{{ $trolleybus->make }}</td>
                                     <td>{{ $trolleybus->date }}</td>
                                     <td>{{ $trolleybus->plate }}</td>
+                                    <td>
+                                        <button type="button" class="detach-button btn btn-warning pull-right"
+                                                data-toggle="modal" data-target="#detachModal"
+                                                data-id="{{ $trolleybus->id }}">Atskirti troleibusa
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -99,7 +108,31 @@
                     <p>Vairuotojas bus istrintas negriztamai.</p>
                 </div>
                 <div class="modal-footer">
-                    <a id="delete-button" href="{{ route('deleteDriver', $main_driver->id) }}" type="button" class="btn btn-default">Taip</a>
+                    <a id="delete-button" href="{{ route('deleteDriver', $main_driver->id) }}" type="button"
+                       class="btn btn-danger">Taip</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Ne</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="detachModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ar tikrai norite atskirti si troleibusa nuo vairuotojo?</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Troleibusas bus atskirtas.</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="detach-button" href="#" type="button"
+                       class="btn btn-warning">Taip</a>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Ne</button>
                 </div>
             </div>
@@ -117,6 +150,14 @@
 
             $("#edit-button").attr("href", editUrl);
             $("#delete-button").attr("href", deleteUrl);
+        });
+
+        $(".detach-button").click(function () {
+            var trolleybusId = $(this).data("id");
+            var driverId = "{{ $main_driver->id }}";
+            var detachUrl = "trolleybus/" + trolleybusId + "/detach-driver/" + driverId;
+
+            $("#detach-button").attr("href", detachUrl);
         });
     </script>
 @endsection

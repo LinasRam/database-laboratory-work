@@ -18,3 +18,13 @@ Route::post('/driver/{id}/edit', 'DriversController@postEditDriver')->name('post
 Route::get('/driver', 'DriversController@newDriver')->name('newDriver');
 Route::post('/driver', 'DriversController@postDriver')->name('postDriver');
 Route::get('/driver/{id}/delete', 'DriversController@deleteDriver')->name('deleteDriver');
+
+Route::get('/trolleybuses', 'TrolleybusController@index')->name('trolleybuses');
+Route::get('/trolleybus', 'TrolleybusController@newTrolleybus')->name('newTrolleybus');
+Route::post('/trolleybus', 'TrolleybusController@postTrolleybus')->name('postTrolleybus');
+Route::get('/trolleybus/{id}/delete', 'TrolleybusController@deleteTrolleybus')->name('deleteTrolleybus');
+Route::get('/trolleybus/{id}/edit', 'TrolleybusController@editTrolleybus')->name('editTrolleybus');
+Route::post('/trolleybus/{id}/edit', 'TrolleybusController@postEditTrolleybus')->name('postEditTrolleybus');
+Route::get('/trolleybus/{id}/available-drivers', 'TrolleybusController@getTrolleybusAvailableDrivers')->name('getTrolleybusAvailableDrivers');
+Route::post('/trolleybus/{id}/attach-driver', 'TrolleybusController@attachDriver')->name('attachDriver');
+Route::get('/trolleybus/{id}/detach-driver/{driverId}', 'TrolleybusController@detachDriver')->name('detachDriver');

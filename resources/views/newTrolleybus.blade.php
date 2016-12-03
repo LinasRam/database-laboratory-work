@@ -5,22 +5,22 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Naujas vairuotojas</h3>
+                    <h3 class="panel-title">Naujas troleibusas</h3>
                 </div>
                 <div class="panel-body">
-                    <form action="{{ route('postDriver') }}" method="post">
+                    <form action="{{ route('postTrolleybus') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="first_name">Vardas</label>
-                            <input id="first_name" class="form-control" name="first_name" type="text">
+                            <label for="make">Marke</label>
+                            <input id="make" class="form-control" name="make" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Pavarde</label>
-                            <input id="last_name" class="form-control" name="last_name" type="text">
+                            <label for="date">Pagaminimo data</label>
+                            <input id="date" class="form-control" name="date" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="birth_date">Gimimo data</label>
-                            <input id="birth_date" class="form-control" name="birth_date" type="text">
+                            <label for="plate">Valstybinis numeris</label>
+                            <input id="plate" class="form-control" name="plate" type="text">
                         </div>
                         <button class="btn btn-primary" type="submit">Ivesti</button>
                     </form>
