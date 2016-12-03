@@ -2,6 +2,20 @@
 
 @section('content')
     <div class="container">
+        @if($errors->all())
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li style="color: red;">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -20,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label for="birth_date">Gimimo data</label>
-                            <input id="birth_date" class="form-control" name="birth_date" type="text">
+                            <input id="birth_date" class="form-control" name="birth_date" type="date">
                         </div>
                         <button class="btn btn-primary" type="submit">Ivesti</button>
                     </form>

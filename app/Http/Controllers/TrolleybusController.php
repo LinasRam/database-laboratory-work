@@ -9,14 +9,36 @@ use Illuminate\Http\Request;
 class TrolleybusController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $trolleybuses = Trolleybus::all();
+        $make = $request->input('make');
+        $dateFrom = $request->input('date-from');
+        $dateTo = $request->input('date-to');
+        $plate = $request->input('plate');
+
+        $query = Trolleybus::query();
+
+        if($make != null){
+            $query->where('make', $make);
+        }
+        if($dateFrom != null){
+            $query->where('date', '>=', $dateFrom);
+        }
+        if($dateTo != null){
+            $query->where('date', '<=', $dateTo);
+        }
+        if($plate != null){
+            $query->where('plate', 'like', "%$plate%");
+        }
+
+        $trolleybuses = $query->orderBy('id')->get();
         $drivers = Driver::all();
+        $makes = Trolleybus::select('make')->distinct('make')->orderBy('make')->get();
 
         return view('trolleybuses', array(
             'trolleybuses' => $trolleybuses,
             'drivers' => $drivers,
+            'makes' => $makes,
         ));
     }
 
@@ -30,7 +52,7 @@ class TrolleybusController extends Controller
         $this->validate($request, [
             'make' => 'required',
             'date' => 'required|date',
-            'plate' => 'required',
+            'plate' => 'required|max:6',
         ]);
 
         $trolleybus = new Trolleybus();
@@ -70,7 +92,7 @@ class TrolleybusController extends Controller
         $this->validate($request, [
             'make' => 'required',
             'date' => 'required|date',
-            'plate' => 'required',
+            'plate' => 'required|max:6',
         ]);
 
         $trolleybus->make = $request->get('make');

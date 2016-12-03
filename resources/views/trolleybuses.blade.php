@@ -2,49 +2,97 @@
 
 @section('content')
     <div class="container">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Visi troleibusai</h3>
-                    <a href="{{ route('newTrolleybus') }}" class="btn btn-primary pull-right">Ivesti nauja</a>
-                    <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Paieska</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="get">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="make">Marke:</label>
+                                    <select class="form-control" id="make" name="make">
+                                        <option value="">-Marke-</option>
+                                        @foreach($makes as $make)
+                                            <option value="{{ $make->make }}">{{ $make->make }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="date-from">Pagaminimo data nuo:</label>
+                                    <input id="date-from" name="date-from" class="form-control" type="date">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="date-to">Pagaminimo data iki:</label>
+                                    <input id="date-to" name="date-to" class="form-control" type="date">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="plate">Valstybinis numeris:</label>
+                                    <input id="plate" name="plate" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label style="visibility: hidden">s</label>
+                                <button class="btn btn-default" type="submit">Ieskoti</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Troleibuso ID</th>
-                            <th>Marke</th>
-                            <th>Pagaminimo data</th>
-                            <th>Valstybinis numeris</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($trolleybuses as $trolleybus)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Visi troleibusai</h3>
+                        <a href="{{ route('newTrolleybus') }}" class="btn btn-primary pull-right">Ivesti nauja</a>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
                             <tr>
-                                <td>{{ $trolleybus->id }}</td>
-                                <td>{{ $trolleybus->make }}</td>
-                                <td>{{ $trolleybus->date }}</td>
-                                <td>{{ $trolleybus->plate }}</td>
-                                <td>
-                                    <button type="button" class="delete-button btn btn-danger pull-right"
-                                            style="margin-left: 3px;"
-                                            data-toggle="modal" data-target="#deleteModal"
-                                            data-id="{{ $trolleybus->id }}">Istrinti
-                                    </button>
-                                    <a id="edit-button" href="{{ route('editTrolleybus', $trolleybus->id) }}"
-                                       class="btn btn-warning pull-right" style="margin-left: 3px;">Redaguoti</a>
-                                    <button type="button" class="attach-button btn btn-default pull-right"
-                                            style="margin-left: 3px;"
-                                            data-toggle="modal" data-target="#attachModal"
-                                            data-id="{{ $trolleybus->id }}">Priskirti vairuotoja
-                                    </button>
-                                </td>
+                                <th>Troleibuso ID</th>
+                                <th>Marke</th>
+                                <th>Pagaminimo data</th>
+                                <th>Valstybinis numeris</th>
+                                <th></th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach($trolleybuses as $trolleybus)
+                                <tr>
+                                    <td>{{ $trolleybus->id }}</td>
+                                    <td>{{ $trolleybus->make }}</td>
+                                    <td>{{ $trolleybus->date }}</td>
+                                    <td>{{ $trolleybus->plate }}</td>
+                                    <td>
+                                        <button type="button" class="delete-button btn btn-danger pull-right"
+                                                style="margin-left: 3px;"
+                                                data-toggle="modal" data-target="#deleteModal"
+                                                data-id="{{ $trolleybus->id }}">Istrinti
+                                        </button>
+                                        <a id="edit-button" href="{{ route('editTrolleybus', $trolleybus->id) }}"
+                                           class="btn btn-warning pull-right" style="margin-left: 3px;">Redaguoti</a>
+                                        <button type="button" class="attach-button btn btn-default pull-right"
+                                                style="margin-left: 3px;"
+                                                data-toggle="modal" data-target="#attachModal"
+                                                data-id="{{ $trolleybus->id }}">Priskirti vairuotoja
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
