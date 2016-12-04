@@ -18,6 +18,7 @@ Route::post('/driver/{id}/edit', 'DriversController@postEditDriver')->name('post
 Route::get('/driver', 'DriversController@newDriver')->name('newDriver');
 Route::post('/driver', 'DriversController@postDriver')->name('postDriver');
 Route::get('/driver/{id}/delete', 'DriversController@deleteDriver')->name('deleteDriver');
+Route::get('/driver/report', 'DriversController@getReport')->name('driverReport');
 
 Route::get('/trolleybuses', 'TrolleybusController@index')->name('trolleybuses');
 Route::get('/trolleybus', 'TrolleybusController@newTrolleybus')->name('newTrolleybus');
@@ -28,3 +29,6 @@ Route::post('/trolleybus/{id}/edit', 'TrolleybusController@postEditTrolleybus')-
 Route::get('/trolleybus/{id}/available-drivers', 'TrolleybusController@getTrolleybusAvailableDrivers')->name('getTrolleybusAvailableDrivers');
 Route::post('/trolleybus/{id}/attach-driver', 'TrolleybusController@attachDriver')->name('attachDriver');
 Route::get('/trolleybus/{id}/detach-driver/{driverId}', 'TrolleybusController@detachDriver')->name('detachDriver');
+Route::get('/trolleybus/report', 'TrolleybusController@getReport')->name('trolleybusReport');
+
+Route::get('route/report', 'RouteController@getReport')->name('routeReport');

@@ -37,6 +37,15 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('drivers') }}">Vairuotojai</a></li>
                 <li><a href="{{ route('trolleybuses') }}">Troleibusai</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Ataskaitos <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ route('trolleybusReport') }}">Troleibusas-Vairuotojai</a></li>
+                        <li><a href="{{ route('driverReport') }}">Vairuotojas-Troleibusai</a></li>
+                        <li><a href="{{ route('routeReport') }}">Marsrutai</a></li>
+                    </ul>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

@@ -97,4 +97,25 @@ class DriversController extends Controller
         return response()->redirectToRoute('drivers');
     }
 
+    public function getReport(Request $request)
+    {
+        $names = Driver::orderBy('first_name')->get();
+
+        $query = Driver::query();
+
+        $driverId = $request->input('driver');
+        if ($driverId != null) {
+            $query->where('id', $driverId);
+        }
+
+        $drivers = $query->with(['trolleybuses' => function ($query) {
+            $query->orderBy('id');
+        }])->get();
+
+        return view('driverReport', array(
+            'drivers' => $drivers,
+            'names' => $names,
+        ));
+    }
+
 }

@@ -18,16 +18,16 @@ class TrolleybusController extends Controller
 
         $query = Trolleybus::query();
 
-        if($make != null){
+        if ($make != null) {
             $query->where('make', $make);
         }
-        if($dateFrom != null){
+        if ($dateFrom != null) {
             $query->where('date', '>=', $dateFrom);
         }
-        if($dateTo != null){
+        if ($dateTo != null) {
             $query->where('date', '<=', $dateTo);
         }
-        if($plate != null){
+        if ($plate != null) {
             $query->where('plate', 'like', "%$plate%");
         }
 
@@ -128,14 +128,48 @@ class TrolleybusController extends Controller
         $drivers = Driver::all();
 
         foreach ($drivers as $key => $driver) {
-            foreach ($trolleybusDrivers as $trolleybusDriver){
-                if ($driver->id == $trolleybusDriver->id){
+            foreach ($trolleybusDrivers as $trolleybusDriver) {
+                if ($driver->id == $trolleybusDriver->id) {
                     unset($drivers[$key]);
                 }
             }
         }
 
         return response()->json($drivers);
+    }
+
+    public function getReport(Request $request)
+    {
+        $makes = Trolleybus::select('make')->distinct('make')->orderBy('make')->get();
+
+        $make = $request->input('make');
+        $dateFrom = $request->input('date-from');
+        $dateTo = $request->input('date-to');
+        $plate = $request->input('plate');
+
+        $query = Trolleybus::query();
+
+        if ($make != null) {
+            $query->where('make', $make);
+        }
+        if ($dateFrom != null) {
+            $query->where('date', '>=', $dateFrom);
+        }
+        if ($dateTo != null) {
+            $query->where('date', '<=', $dateTo);
+        }
+        if ($plate != null) {
+            $query->where('plate', 'like', "%$plate%");
+        }
+
+        $trolleybuses = $query->with(['drivers' => function ($query) {
+            $query->orderBy('id');
+        }])->orderBy('id')->get();
+
+        return view('trolleybusReport', array(
+            'trolleybuses' => $trolleybuses,
+            'makes' => $makes,
+        ));
     }
 
 }
