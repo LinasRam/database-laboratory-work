@@ -99,8 +99,6 @@ class DriversController extends Controller
 
     public function getReport(Request $request)
     {
-        $names = Driver::orderBy('first_name')->get();
-
         $query = Driver::query();
 
         $driverId = $request->input('driver');
@@ -114,6 +112,14 @@ class DriversController extends Controller
 
         return view('driverReport', array(
             'drivers' => $drivers,
+        ));
+    }
+
+    public function getReportForm()
+    {
+        $names = Driver::orderBy('first_name')->get();
+
+        return view('driverReportForm', array(
             'names' => $names,
         ));
     }

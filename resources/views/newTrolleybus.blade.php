@@ -25,7 +25,7 @@
                     <form action="{{ route('postTrolleybus') }}" method="post">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="make">Marke</label>
+                            <label for="make">Markė</label>
                             <input id="make" class="form-control" name="make" type="text">
                         </div>
                         <div class="form-group">

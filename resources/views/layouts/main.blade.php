@@ -41,9 +41,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Ataskaitos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ route('trolleybusReport') }}">Troleibusas-Vairuotojai</a></li>
-                        <li><a href="{{ route('driverReport') }}">Vairuotojas-Troleibusai</a></li>
-                        <li><a href="{{ route('routeReport') }}">Marsrutai</a></li>
+                        <li><a href="{{ route('trolleybusReportForm') }}">Troleibusas-Vairuotojai</a></li>
+                        <li><a href="{{ route('driverReportForm') }}">Vairuotojas-Troleibusai</a></li>
+                        <li><a href="{{ route('routeReportForm') }}">Maršrutai</a></li>
                     </ul>
                 </li>
             </ul>

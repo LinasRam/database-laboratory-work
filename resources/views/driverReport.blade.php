@@ -1,35 +1,7 @@
-@extends('layouts.main')
+@extends('layouts.report')
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Kriterijai</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form method="get">
-                            <div class="col-md-11">
-                                <div class="form-group">
-                                    <label for="driver">Vairuotojas</label>
-                                    <select class="form-control" id="driver" name="driver">
-                                        <option value="">-Vairuotojas-</option>
-                                        @foreach($names as $name)
-                                            <option value="{{ $name->id }}">{{ $name->first_name . " " . $name->last_name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <label style="visibility: hidden">s</label>
-                                <button class="btn btn-default" type="submit">Rodyti</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -54,7 +26,7 @@
                                                 <p><strong>Vardas: {{ $driver->first_name }}</strong></p>
                                             </div>
                                             <div class="col-md-3">
-                                                <p><strong>Pavarde: {{ $driver->last_name }}</strong></p>
+                                                <p><strong>Pavardė: {{ $driver->last_name }}</strong></p>
                                             </div>
                                             <div class="col-md-3">
                                                 <p><strong>Gimimo data: {{ $driver->birth_date }}</strong></p>
@@ -65,7 +37,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th>Troleibuso ID</th>
-                                                    <th>Marke</th>
+                                                    <th>Markė</th>
                                                     <th>Pagaminimo data</th>
                                                     <th>Valstybinis numeris</th>
                                                 </tr>
@@ -85,7 +57,7 @@
                                         </div>
                                         <div class="panel-footer" style="padding-bottom: 30px;">
                                             <div class="col-md-3">
-                                                <p><strong>Is viso troleibusu: {{ $trolleybusCount }}</strong></p>
+                                                <p><strong>Iš viso troleibusų: {{ $trolleybusCount }}</strong></p>
                                             </div>
                                         </div>
                                     </div>
@@ -95,7 +67,7 @@
                     </div>
                     <div class="panel-footer" style="padding-bottom: 30px;">
                         <div class="col-md-3">
-                            <p><strong>Is viso vairuotoju: {{ $driverCount }}</strong></p>
+                            <p><strong>Iš viso vairuotojų: {{ $driverCount }}</strong></p>
                         </div>
                     </div>
                 </div>

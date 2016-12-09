@@ -19,7 +19,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Redaguoti vairuotoja</h3>
+                    <h3 class="panel-title">Redaguoti vairuotoją</h3>
                 </div>
                 <div class="panel-body">
                     <form action="{{ route('postEditDriver', $driver->id) }}" method="post">
@@ -30,7 +30,7 @@
                                    value="{{ $driver->first_name }}">
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Pavarde</label>
+                            <label for="last_name">Pavardė</label>
                             <input id="last_name" class="form-control" name="last_name" type="text"
                                    value="{{ $driver->last_name }}">
                         </div>

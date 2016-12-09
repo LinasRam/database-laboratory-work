@@ -24,8 +24,17 @@ class RouteController extends Controller
         ');
 
         return view('routeReport', array(
-            'selectRoutes' => $selectRoutes,
             'routes' => $routes,
+            'selectRoutes' => $selectRoutes,
+        ));
+    }
+
+    public function getReportForm()
+    {
+        $selectRoutes = DB::select('select distinct route_num from routes');
+
+        return view('routeReportForm', array(
+            'selectRoutes' => $selectRoutes,
         ));
     }
 

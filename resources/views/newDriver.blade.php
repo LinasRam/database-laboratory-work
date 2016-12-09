@@ -29,14 +29,14 @@
                             <input id="first_name" class="form-control" name="first_name" type="text">
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Pavarde</label>
+                            <label for="last_name">Pavardė</label>
                             <input id="last_name" class="form-control" name="last_name" type="text">
                         </div>
                         <div class="form-group">
                             <label for="birth_date">Gimimo data</label>
                             <input id="birth_date" class="form-control" name="birth_date" type="date">
                         </div>
-                        <button class="btn btn-primary" type="submit">Ivesti</button>
+                        <button class="btn btn-primary" type="submit">Įvesti</button>
                     </form>
                 </div>
             </div>

@@ -172,4 +172,13 @@ class TrolleybusController extends Controller
         ));
     }
 
+    public function getReportForm()
+    {
+        $makes = Trolleybus::select('make')->distinct('make')->orderBy('make')->get();
+
+        return view('trolleybusReportForm', array(
+            'makes' => $makes,
+        ));
+    }
+
 }
