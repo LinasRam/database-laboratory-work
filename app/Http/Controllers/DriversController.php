@@ -48,10 +48,12 @@ class DriversController extends Controller
     {
         $driver = Driver::find($id);
 
+        $current_date = date('Y-m-d');
+
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'birth_date' => 'required|date',
+            'birth_date' => "required|date|before:$current_date",
         ]);
 
         $driver->first_name = $request->get('first_name');
@@ -70,10 +72,12 @@ class DriversController extends Controller
 
     public function postDriver(Request $request)
     {
+        $current_date = date('Y-m-d');
+
         $this->validate($request, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'birth_date' => 'required|date',
+            'birth_date' => "required|date|before:$current_date",
         ]);
 
         $driver = new Driver();

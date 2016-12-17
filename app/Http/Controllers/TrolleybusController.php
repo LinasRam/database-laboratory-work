@@ -49,9 +49,11 @@ class TrolleybusController extends Controller
 
     public function postTrolleybus(Request $request)
     {
+        $current_date = date('Y-m-d');
+
         $this->validate($request, [
             'make' => 'required',
-            'date' => 'required|date',
+            'date' => "required|date|before:$current_date",
             'plate' => 'required|max:6',
         ]);
 
@@ -89,9 +91,11 @@ class TrolleybusController extends Controller
     {
         $trolleybus = Trolleybus::find($id);
 
+        $current_date = date('Y-m-d');
+
         $this->validate($request, [
             'make' => 'required',
-            'date' => 'required|date',
+            'date' => "required|date|before:$current_date",
             'plate' => 'required|max:6',
         ]);
 

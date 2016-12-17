@@ -39,6 +39,22 @@
                         <h3 class="panel-title">Informacija apie vairuotoją</h3>
                     </div>
                     <div class="panel-body">
+                        @if($errors->all())
+                            <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <ul>
+                                                @foreach($errors->all() as $error)
+                                                    <li style="color: red;">{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
                         <form action="{{ route('postEditDriver', $main_driver->id) }}" method="post">
                             {{ csrf_field() }}
                             <ul class="list-group">
@@ -59,7 +75,7 @@
                                 </li>
                                 <li class="list-group-item form-group"><label for="birth_date">Gimimo
                                         data:</label><input
-                                            id="birth_date" name="birth_date" class="form-control" type="text"
+                                            id="birth_date" name="birth_date" class="form-control" type="date"
                                             value="{{ $main_driver->birth_date }}"></li>
                             </ul>
                             <button type="submit" id="edit-button" href="{{ route('editDriver', $main_driver->id) }}"
